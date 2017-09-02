@@ -1,0 +1,113 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import ="java.sql.*" %>
+<%@page import="javax.servlet.http.*"%>
+<%@page language="java" session="true"%>
+<%@page import ="javax.sql.*" %>
+<%!String facid, facname,faclevel;//!!!! %>
+
+<%
+    facid = (String) session.getAttribute("fac_id");
+%>
+<!DOCTYPE html>
+<html ng-app="schemaCreation">
+<head>
+	<title>Schema Creation</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+<body ng-controller="schemaController">
+	<div class="container-fluid">
+		<h1>Create Schema</h1>
+		<form name="sampleForm" novalidate>
+			<div class="container-fluid">
+                            <input id="facid" type="hidden"value=<%=facid%>>
+				<div class="row">
+					<div class="col-md-3" style="display: none;">
+						<label for="assesmentType">Assesment Type:</label>
+						<select class="form-control"  id="assesmentType">
+                                                <option value="mid">Mid</option>
+					        <option value="ass1">Assignment 1</option>
+					        <option value="ass2">Assignment 2</option>
+					        <option value="ass3">Assignment 3</option>
+					        <option value="quiz">Quiz</option>
+						</select>
+					</div>
+					<div class="col-md-3" style="display: none;">
+						<label for="assesmentNumber">Assesment Number:</label>
+      					<select class="form-control" id="assesmentNumber">
+					        <option value="1" selected>1</option>
+					        <option value="2">2</option>
+					        <option value="3">3</option>
+					        <option value="4">4</option>
+					     </select>
+					</div>
+					<div class="col-md-3">
+						<label for="schemaId">Schema Name: </label>
+                                                <input type="text" class="form-control" id="schemaName" name="schemaName" ng-model="schemaName" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+						<label for="totalMarks">Total Marks:</label>
+						<input type="text" class="form-control" id="totalMarks" data-ng-model="totalMarks">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+						<button class="btn btn-primary" ng-click="showSectionsDiv()">Submit</button>
+					</div>
+				</div>
+			</div>
+			<div ng-show="sectionsDiv === 1" class="container-fluid">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<label for="sections">Enter the total number of sections:</label>
+						<input type="text" id="sections" class="form-control" data-ng-model="sections">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+						<button class="btn btn-primary" ng-click="askAboutSections()">Submit</button>
+					</div>
+				</div>
+			</div>
+			<div ng-show="aboutSectionsStatus" class="container-fluid">
+				<div class="container-fluid aboutSections">
+
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+						<button class="btn btn-primary" ng-click="validateFields()">Submit</button>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid" ng-show="bitsDivStatus">
+				<div class="container-fluid bitsDiv">
+					
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+						<button class="btn btn-primary" ng-click="validateBitsFields()">Submit</button>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid" ng-show="bitMarksAllocationStatus">
+				<div class="container-fluid bitMarksAllocationDiv">
+
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+						<button class="btn btn-primary"  ng-click="validateBitsAllocation()">Submit</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+<script src="./js/jquery-3.1.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/angular.min.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

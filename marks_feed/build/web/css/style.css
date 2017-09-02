@@ -1,0 +1,9 @@
+.row {
+	padding: 10px;
+}
+.mouseOverEffect {
+    text-decoration: underline;
+}
+.mouseOverEffect:hover {
+    cursor: pointer
+}
